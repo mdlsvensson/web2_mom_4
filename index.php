@@ -12,19 +12,23 @@
   if ($result->rowCount() > 0) {
     $row = $result->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($row as $post) {
-      echo '<h2>' . $post['title'] . '</h2>';
-      echo '<small>' . $post['postdate'] . '</small>';
+    for ($i=0; $i < 2; $i++) {
 
-      $linebreaked = nl2br($post['content']);
+      if (!isset($row[$i])) return;
+
+      echo '<h2>' . $row[$i]['title'] . '</h2>';
+      echo '<small>' . $row[$i]['postdate'] . '</small>';
+
+      $linebreaked = nl2br($row[$i]['content']);
 
       if (strlen(strip_tags($linebreaked)) > 500) {
       $cutContent = substr($linebreaked, 0, 500);
-
+      } else {
+        $cutContent = $linebreaked;
       }
 
       echo '<p>' . $cutContent . '...</p>';
-      echo '<form action="post.php" method="get"><button type="submit" name="postid" value="' . $post['id'] . '">Read more</button></form>';
+      echo '<form action="post.php" method="get"><button type="submit" name="postid" value="' . $row[$i]['id'] . '">Read more</button></form>';
     }
 
   } else {
@@ -32,6 +36,3 @@
   }
 
   include("includes/footer.php");
-?>
-
-<?php

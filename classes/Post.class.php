@@ -24,7 +24,7 @@
       if (strlen($title) > 128) {
         $errors[] = '<p>Your post title is too long.</p>';
       }
-      if (strlen($postcontent) > 5000) {
+      if (strlen($postcontent) > 10000) {
         $errors[] = '<p>your post content is too long. Maximum 5000 characters.</p>';
       }
       if (strlen($title) < 6) {
@@ -35,6 +35,6 @@
     }
 
     public function latestPosts() {
-      
+
     }
   }
