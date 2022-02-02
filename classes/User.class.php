@@ -12,13 +12,18 @@
 
     public function login(string $email, string $password) : bool {
 
-      $sql = "SELECT * FROM users WHERE email='$email' AND password='$password';";
+      $sql = "SELECT * FROM users WHERE email='$email';";
 
       $result = $this->conn->query($sql);
 
       if ($result->rowCount() > 0) {
-        $_SESSION['email'] = $email;
-        return true;
+        $row = $result->fetchAll(PDO::FETCH_ASSOC);
+        $stored_password = $row[0]['password'];
+
+        if (password_verify($password, $stored_password)) {
+          $_SESSION['email'] = $email;
+          return true;
+        }
       } else {
         return false;
       }
