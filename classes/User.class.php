@@ -23,6 +23,8 @@
         if (password_verify($password, $stored_password)) {
           $_SESSION['email'] = $email;
           return true;
+        } else {
+          return false;
         }
       } else {
         return false;
