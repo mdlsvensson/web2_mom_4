@@ -26,7 +26,9 @@
 
     public function register(string $email, string $password) {
 
-      $sql = "INSERT INTO users(email, password)VALUES('$email', '$password');";
+      $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+      $sql = "INSERT INTO users(email, password)VALUES('$email', '$hashedPassword');";
       $result = $this->conn->query($sql);
 
       return $result;
