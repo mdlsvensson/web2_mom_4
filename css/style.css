@@ -46,3 +46,12 @@ a {
 footer {
   margin-top: 10px;
 }
+
+textarea {
+  width: 500px;
+  height: 200px;
+}
+
+#blog-title-input {
+  width: 500px;
+}

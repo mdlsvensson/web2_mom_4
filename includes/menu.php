@@ -7,6 +7,7 @@
                             echo '<li><a href="login.php">Log in</a></li>';
                             echo '<li><a href="register.php">Register</a></li>';
                         } else {
+                            echo '<li><a href="admin.php">Admin</a></li>';
                             echo '<li><a href="logout.php">Log out</a></li>';
                         }
                     ?>

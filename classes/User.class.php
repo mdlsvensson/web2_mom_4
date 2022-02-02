@@ -49,8 +49,6 @@
       }
     }
 
-    
-
     public function restrictPage() {
       if (!isset($_SESSION['email'])) {
         header('Location: login.php?error=Du måste vara inloggad.');
