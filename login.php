@@ -8,16 +8,20 @@
 
   <?php
 
+    // If there are any errors, write them to DOM
     if (isset($_GET['error'])) {
       echo '<p>' . $_GET['error'] . '</p>';
     };
 
     if (isset($_POST['email'])) {
+      // Get POST data
       $email = $_POST['email'];
       $password = $_POST['password'];
 
+      // Create new User Object
       $user = new User();
 
+      // If login is successful, echo message. If unsuccessful, give error
       if ($user->login($email, $password)) {
         echo '<p>You are now logged in.</p>';
       } else {
@@ -25,6 +29,7 @@
       }
     }
 
+    // If logged in, redirect to admin backend.
     if (isset($_SESSION['email'])) {
       header('Location: admin.php');
     }
