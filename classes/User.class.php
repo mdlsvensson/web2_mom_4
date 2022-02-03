@@ -2,19 +2,18 @@
 
   class User  {
     
-    private $conn;
+    private $db;
     public $errors = [];
 
     function __construct() {
-      $db = new Dbh;
-      $this->conn = $db->connect();
+      $this->db = new Dbh;
     }
 
     public function login(string $email, string $password) : bool {
 
       $sql = "SELECT * FROM users WHERE email='$email';";
 
-      $result = $this->conn->query($sql);
+      $result = $this->db->query($sql);
 
       if ($result->rowCount() > 0) {
         $row = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -36,7 +35,7 @@
       $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
       $sql = "INSERT INTO users(email, password)VALUES('$email', '$hashedPassword');";
-      $result = $this->conn->query($sql);
+      $result = $this->db->query($sql);
 
       return $result;
     }
@@ -77,7 +76,7 @@
 
       $sql = "SELECT * FROM users WHERE email='$email';";
 
-      $result = $this->conn->query($sql);
+      $result = $this->db->query($sql);
 
       if ($result->rowCount() > 0) {
         $_SESSION['email'] = $email;

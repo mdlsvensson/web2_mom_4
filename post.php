@@ -6,11 +6,7 @@
     $id = $_GET['postid'];
 
     $db = new Dbh();
-    $conn = $db->connect();
-
-    $sql = "SELECT * FROM blog WHERE id = '$id';";
-
-    $result = $conn->query($sql);
+    $result = $db->query("SELECT * FROM blog WHERE id = '$id';");
 
     $row = $result->fetchAll(PDO::FETCH_ASSOC);
 

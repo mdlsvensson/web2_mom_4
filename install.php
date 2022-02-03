@@ -2,7 +2,6 @@
   include('includes/config.php');
   // Anslut
   $db = new Dbh;
-  $conn = $db->connect();
 
   // Skapa tabell
   $sql = 'CREATE TABLE users(
@@ -12,10 +11,7 @@
   );';
 
   // Skicka
-  echo '<pre>';
-  var_dump($conn);
-  echo '</pre>';
-  if($conn->query($sql)) {
+  if($db->query($sql)) {
     echo 'Table installed.';
   } else {
     echo 'Table installation error.';

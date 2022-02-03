@@ -8,10 +8,6 @@
 
   <?php
 
-    if (isset($_SESSION['email'])) {
-      echo '<p>You are logged in as: ' . $_SESSION['email'] . '.<br>';
-    }
-
     if (isset($_GET['error'])) {
       echo '<p>' . $_GET['error'] . '</p>';
     };
@@ -28,6 +24,11 @@
         echo '<p>Invalid email/password.</p>';
       }
     }
+
+    if (isset($_SESSION['email'])) {
+      header('Location: admin.php');
+    }
+    
   ?>
 
   <input type="email" name="email" id="email" placeholder="email">

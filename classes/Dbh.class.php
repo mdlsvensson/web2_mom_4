@@ -8,7 +8,7 @@ class Dbh {
   private $dbname;
   private $port;
 
-  public function connect() {
+  public function query($sql) {
     $this->host = '127.0.0.1';
     $this->username = 'root';
     $this->password = '';
@@ -19,7 +19,8 @@ class Dbh {
       $dsn = 'mysql:dbname=' . $this->dbname . ';host=' . $this->host . ';port=' . $this->port;
       $pdo = new PDO($dsn, $this->username, $this->password);
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      return $pdo;
+      $result = $pdo->query($sql);
+      return $result;
     } catch (PDOException $e) {
       echo 'Connection failed: ' . $e->getMessage();
     }
