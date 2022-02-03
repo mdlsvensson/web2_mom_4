@@ -9,17 +9,21 @@
   <?php
 
     if (isset($_POST['email'])) {
+      // Get POST data
       $email = $_POST['email'];
       $password = $_POST['password'];
 
+      // New User Object
       $user = new User();
-
+      // Get any errors from form input
       $errors = $user->validate($email, $password);
 
+      // If there are any errors, write them to the DOM
       if (count($errors) > 0) {
         for ($i=0; $i < count($errors); $i++) { 
           echo $errors[$i];
         }
+        // If there are no errors and reg is successful, print message to DOM
       } elseif ($user->register($email, $password)) {
         echo '<p>Registration successful.</p>';
       } 
