@@ -29,7 +29,7 @@ class Dbh {
       // Sending query and returning the result
       $result = $pdo->query($sql);
       return $result;
-      // Catch errors and echo to the screen
+      // Catch errors and echo to the screenD
     } catch (PDOException $e) {
       echo 'Connection failed: ' . $e->getMessage();
     }
