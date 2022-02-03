@@ -14,7 +14,7 @@
 
     for ($i=0; $i < 2; $i++) {
 
-      if (!isset($row[$i])) return;
+      if (!isset($row[$i])) continue;
 
       echo '<h2>' . $row[$i]['title'] . '</h2>';
       echo '<small>' . $row[$i]['postdate'] . '</small>';

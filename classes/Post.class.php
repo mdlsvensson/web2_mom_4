@@ -25,10 +25,13 @@
         $errors[] = '<p>Your post title is too long.</p>';
       }
       if (strlen($postcontent) > 10000) {
-        $errors[] = '<p>your post content is too long. Maximum 5000 characters.</p>';
+        $errors[] = '<p>Your post content is too long. Maximum 5000 characters.</p>';
       }
       if (strlen($title) < 6) {
         $errors[] = '<p>Your post title is too short. It needs to be at least 6 characters.</p>';
+      }
+      if (strlen($postcontent) < 10) {
+        $errors[] = '<p>your post content is too short. Minimum 10 characters.</p>';
       }
     
       return $errors;

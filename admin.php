@@ -39,9 +39,50 @@
 
   <p><input type="text" name="title" placeholder="Title" id="blog-title-input"></p>
   
-  <p><textarea type="textarea" name="postcontent" id="postcontent" placeholder="Post content"></textarea></p>
+  <p><textarea name="postcontent" id="postcontent" placeholder="Post content"></textarea></p>
   <button type="submit">Post</button>
 </form>
 
+<h1>Manage posts</h1>
+
 <?php
+
+$db = new Dbh();
+$conn = $db->connect();
+
+$sql = "SELECT * FROM blog;";
+
+$result = $conn->query($sql);
+
+if ($result->rowCount() > 0) {
+  $row = $result->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($row as $post) {
+    echo '<h2>' . $post['title'] . '</h2>';
+    echo '<small>' . $post['postdate'] . '</small>';
+
+    $linebreaked = nl2br($post['content']);
+
+    if (strlen(strip_tags($linebreaked)) > 200) {
+      $cutContent = substr($linebreaked, 0, 200);
+    } else {
+      $cutContent = $linebreaked;
+    }
+
+    echo '<p>' . $cutContent . '...</p>';
+    echo '<form action="admin.php" method="get"><button type="submit" name="postid" value="' . $post['id'] . '">Delete</button></form>';
+  }
+
+} else {
+  echo '<p>There are no posts yet. Please register/log in and create a post.</p>';
+}
+
+if (isset($_GET['postid'])) {
+  $id = $_GET['postid'];
+
+  $sql = "DELETE FROM blog WHERE id = '$id';";
+
+  $result = $conn->query($sql);
+}
+
 include('includes/footer.php');
